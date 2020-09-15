@@ -216,11 +216,54 @@ function binario() {
 function blur(){
   context.drawImage(image, 0, 0, imageScaledWidth, imageScaledHeight);
   imageData = context.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
-  for (let x = 1; x < imageData.width-1; x++) {
-      for (let y = 1; y < imageData.height-1; y++) {
-        r = ((getR(x-1,y-1)+getR(x-1,y)+getR(x-1,y+1)+getR(x,y-1)+getR(x,y)+getR(x,y+1)+getR(x+1,y+1)+getR(x+1,y)+getR(x+1,y-1))/9);
-        g = ((getG(x-1,y-1)+getG(x-1,y)+getG(x-1,y+1)+getG(x,y-1)+getG(x,y)+getG(x,y+1)+getG(x+1,y+1)+getG(x+1,y)+getG(x+1,y-1))/9);
-        b = ((getB(x-1,y-1)+getB(x-1,y)+getB(x-1,y+1)+getB(x,y-1)+getB(x,y)+getB(x,y+1)+getB(x+1,y+1)+getB(x+1,y)+getB(x+1,y-1))/9);
+  for (let x = 0; x < imageData.width; x++) {
+      for (let y = 0; y < imageData.height; y++) {
+          if (x==0 && y==0) { //esquina superior izquierda
+          r = ((getR(x,y)+getR(x+1,y)+getR(x,y+1)+getR(x+1,y+1))/4);
+          g = ((getG(x,y)+getG(x+1,y)+getG(x,y+1)+getG(x+1,y+1))/4);
+          b = ((getB(x,y)+getB(x+1,y)+getB(x,y+1)+getB(x+1,y+1))/4);
+        }
+        else if ((x!=0 && x!=imageData.width-1) && (y==0)) { //borde superior
+          r = ((getR(x,y)+getR(x-1,y)+getR(x-1,y+1)+getR(x,y+1)+getR(x+1,y+1)+getR(x+1,y))/6);
+          g = ((getG(x,y)+getG(x-1,y)+getG(x-1,y+1)+getG(x,y+1)+getG(x+1,y+1)+getG(x+1,y))/6);
+          b = ((getB(x,y)+getB(x-1,y)+getB(x-1,y+1)+getB(x,y+1)+getB(x+1,y+1)+getB(x+1,y))/6);
+        }
+        else if (x==imageData.width-1 && y==0) { //esquina superior derecha
+          r = ((getR(x,y)+getR(x-1,y)+getR(x-1,y+1)+getR(x,y+1))/4);
+          g = ((getG(x,y)+getG(x-1,y)+getG(x-1,y+1)+getG(x,y+1))/4);
+          b = ((getB(x,y)+getB(x-1,y)+getB(x-1,y+1)+getB(x,y+1))/4);
+        }
+        else if (x==imageData.width-1 && (y!=0 && y!=imageData.height-1)) { //borde derecho
+          r = ((getR(x,y)+getR(x,y-1)+getR(x-1,y-1)+getR(x-1,y)+getR(x-1,y+1)+getR(x,y+1))/6);
+          g = ((getG(x,y)+getG(x,y-1)+getG(x-1,y-1)+getG(x-1,y)+getG(x-1,y+1)+getG(x,y+1))/6);
+          b = ((getB(x,y)+getB(x,y-1)+getB(x-1,y-1)+getB(x-1,y)+getB(x-1,y+1)+getB(x,y+1))/6);
+        }
+        else if (x==imageData.width-1 && y==imageData.height-1) { //esquina inferior derecha
+          r = ((getR(x,y)+getR(x,y-1)+getR(x-1,y-1)+getR(x-1,y))/4);
+          g = ((getG(x,y)+getG(x,y-1)+getG(x-1,y-1)+getG(x-1,y))/4);
+          b = ((getB(x,y)+getB(x,y-1)+getB(x-1,y-1)+getB(x-1,y))/4);
+        }
+        else if ((x!=0 && x!=imageData.width-1) && y==imageData.height-1) { //borde inferior
+          r = ((getR(x,y)+getR(x-1,y)+getR(x-1,y-1)+getR(x,y-1)+getR(x+1,y-1)+getR(x+1,y))/6);
+          g = ((getG(x,y)+getG(x-1,y)+getG(x-1,y-1)+getG(x,y-1)+getG(x+1,y-1)+getG(x+1,y))/6);
+          b = ((getB(x,y)+getB(x-1,y)+getB(x-1,y-1)+getB(x,y-1)+getB(x+1,y-1)+getB(x+1,y))/6);
+        }
+        else if (x==0 && y==imageData.height-1) { //esquina inferior izquierda
+          r = ((getR(x,y)+getR(x,y-1)+getR(x+1,y-1)+getR(x+1,y))/4);
+          g = ((getG(x,y)+getG(x,y-1)+getG(x+1,y-1)+getG(x+1,y))/4);
+          b = ((getB(x,y)+getB(x,y-1)+getB(x+1,y-1)+getB(x+1,y))/4);
+        }
+        else if (x==0 && (y!=0 && y!=imageData.height-1)) { //borde izquierdo
+          r = ((getR(x,y)+getR(x,y-1)+getR(x+1,y-1)+getR(x+1,y)+getR(x+1,y+1)+getR(x,y+1))/6);
+          g = ((getG(x,y)+getG(x,y-1)+getG(x+1,y-1)+getG(x+1,y)+getG(x+1,y+1)+getG(x,y+1))/6);
+          b = ((getB(x,y)+getB(x,y-1)+getB(x+1,y-1)+getB(x+1,y)+getB(x+1,y+1)+getB(x,y+1))/6);
+
+        }
+        else { //resto
+          r = ((getR(x-1,y-1)+getR(x-1,y)+getR(x-1,y+1)+getR(x,y-1)+getR(x,y)+getR(x,y+1)+getR(x+1,y+1)+getR(x+1,y)+getR(x+1,y-1))/9);
+          g = ((getG(x-1,y-1)+getG(x-1,y)+getG(x-1,y+1)+getG(x,y-1)+getG(x,y)+getG(x,y+1)+getG(x+1,y+1)+getG(x+1,y)+getG(x+1,y-1))/9);
+          b = ((getB(x-1,y-1)+getB(x-1,y)+getB(x-1,y+1)+getB(x,y-1)+getB(x,y)+getB(x,y+1)+getB(x+1,y+1)+getB(x+1,y)+getB(x+1,y-1))/9);
+        }
         imageData.data[index + 0] = r;
         imageData.data[index + 1] = g;
         imageData.data[index + 2] = b;
@@ -305,5 +348,5 @@ document.querySelector("#negativo").addEventListener("click",negativo);
 document.querySelector("#binario").addEventListener("click",binario);
 document.querySelector("#sepia").addEventListener("click",sepia);
 document.querySelector("#grises").addEventListener("click",grises);
-document.querySelector("#blur").addEventListener("click",blur)
+document.querySelector("#blur").addEventListener("click",blur);
 document.querySelector("#massaturacion").addEventListener("click",masSaturacion);
