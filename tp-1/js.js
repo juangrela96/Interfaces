@@ -14,6 +14,19 @@ let b;
 
 limpiar();
 
+function save() {                               //PREPARA EL ARCHIVO PARA HACER UN SAVE
+        let dataURL = canvas.toDataURL();
+        downloadImage(dataURL, 'my-canvas.jpeg');
+}
+
+function downloadImage(data, filename = 'untitled.jpeg') {              //DESCARGA LO QUE HAYA EN TU CANVAS
+        let a = document.createElement('a');
+        a.href = data;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+}
+
 function startPosition(){
   paint = true;
 
@@ -103,6 +116,15 @@ function subir(){
                imageAspectRatio = (1.0 * this.height) / this.width;
                imageScaledWidth = canvas.width;
                imageScaledHeight = canvas.width * imageAspectRatio;
+               canvas.width = imageScaledWidth;
+               canvas.height = imageScaledHeight;
+               /*canvas.width = this.width;
+               canvas.width = this.width;
+               imageScaledWidth = this.width;
+               imageScaledHeight = this.height;
+
+              // draw image on canvas
+              context.drawImage(this, 0, 0, canvas.width, canvas.height);*/
 
               // draw image on canvas
               context.drawImage(this, 0, 0, imageScaledWidth, imageScaledHeight);
@@ -117,24 +139,6 @@ function original(){
   context.drawImage(image, 0, 0, imageScaledWidth, imageScaledHeight);
 }
 
-function prueba(){ //ANDAAAAAAAAAA
-              imageData = context.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
-
-              // modify imageData
-              for (let j = 0; j < imageData.height; j++) {
-                  for (let i = 0; i < imageData.width; i++) {
-                      if (i % 2 == 0) {
-                          let index = (i + imageData.width * j) * 4;
-                          imageData.data[index + 0] = 0;
-                          imageData.data[index + 1] = 0;
-                          imageData.data[index + 2] = 0;
-                      }
-                  }
-              }
-
-              // draw the modified image
-              context.putImageData(imageData, 0, 0);
-            }
 
 function negativo(){
   context.drawImage(image, 0, 0, imageScaledWidth, imageScaledHeight);
@@ -224,7 +228,9 @@ function blur(){
     }
     context.putImageData(imageData, 0, 0);
 }
+
 function masSaturacion(){
+  context.drawImage(image, 0, 0, imageScaledWidth, imageScaledHeight);
   imageData = context.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
   let hsl;
   let rgb;
@@ -234,7 +240,7 @@ function masSaturacion(){
         g = getG(x,y);
         b = getB(x,y);
         hsl = rgbToHsl(r,g,b);
-        hsl[1] = 1;
+        hsl[1]=1;
         rgb = hslToRgb(hsl[0],hsl[1],hsl[2]);
         imageData.data[index + 0] = rgb[0];
         imageData.data[index + 1] = rgb[1];
@@ -243,6 +249,7 @@ function masSaturacion(){
     }
     context.putImageData(imageData, 0, 0);
 }
+
 function rgbToHsl(r, g, b) {
   r =r/255;
   g =g/255;
@@ -288,6 +295,7 @@ function hslToRgb(h, s, l) {
 return [r * 255, g * 255, b * 255];
 }
 
+document.querySelector("#guardar").addEventListener("click",save)
 document.querySelector("#goma").addEventListener("click",goma);
 document.querySelector("#pincel").addEventListener("click",pincel);
 document.querySelector("#subir").addEventListener("click",subir);
