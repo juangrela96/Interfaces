@@ -1,0 +1,360 @@
+body {
+  background-color: black;
+}
+
+.invisible{
+  visibility:hidden;
+}
+.boton{
+      background-color: transparent;
+       border: 0px solid;
+       height: 20px;
+       width: 160px;
+       color: black;
+}
+nav{
+  position: fixed;
+  top: 20px;
+}
+#carta{
+  animation: rotar 1.5s linear infinite;
+}
+ul{
+  display: none;
+}
+li {
+  display: block;
+  background: lightgrey;
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  border-bottom: 1px solid grey;
+}
+#menu:checked  ~ ul{
+  display:block;
+}
+#menu {
+  display: none;
+}
+#labelmenu {
+  box-sizing: border-box;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+}
+.carga{
+  position: absolute;
+  top: 250px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  text-align: center;
+}
+.layer{
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed; /*esto nose si va */
+}
+
+.paralax{
+  height: 500px;
+}
+
+#layer1{
+  background-image: url("../images/guason2.jpg");
+  width: 100%;
+  height: 100%;
+}
+
+#layer2{
+  background-image: url("../images/rayo4.png");
+  height: 100%; /*lo pongo en 100 xq sino corta el rayo*/
+  width: 100%;
+  background-size:contain;
+  animation: prenderayo 2s linear infinite;
+}
+
+#layer3{
+  background-image: url("../images/lluvia3.png");
+  background-repeat:repeat-y;
+  height: 100%;
+  width: 100%;
+  opacity: 20%;
+  animation: lluviamove 0.5s  linear infinite;
+}
+.portada{
+  height: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo{
+  margin-top: 30%;
+  font-size: 100px;
+  background-color: #B2290B;
+  text-align: center;
+}
+
+#actores{
+  margin-top: 10%;
+}
+#carrusel {
+  margin-top: 10%;
+}
+#carouselExampleControls{
+  border: red 5px groove
+}
+.imagenes{
+  transition: all ease 1250ms;
+}
+
+.imagenes:hover{
+  animation: atraer 1250ms infinite;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+
+.mostrar{
+  animation: mostrarcarruselescenas 1s linear;
+}
+.ocultar{
+  animation: ocultarcarruselescenas 1s linear;
+}
+
+@keyframes moverevento {
+  50% {transform: rotate3d(1, 2, -1, 192deg)};
+  100%{transform: rotate3d(0, 0, 0, 0deg)}
+}
+
+@keyframes rotar {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
+@keyframes alejar {
+  to{
+    transform: translateX(0px) translateZ(0px);
+  }
+}
+@keyframes atraer {
+  to{
+    transform: perspective(2000px) rotateX(0deg) rotateY(30deg) rotateZ(0deg) translateX(-30px) translateY(0px) translateZ(200px);
+  }
+}
+
+@keyframes ocultarcarruselescenas {
+  from {
+    margin-left: 15%;
+
+  }
+  to {
+    margin-left: -100%;
+
+  }
+}
+@keyframes mostrarcarruselescenas {
+  from {
+    margin-left: -100%;
+
+  }
+  to {
+    margin-left: 15%;
+
+  }
+}
+@keyframes lluviamove {
+  0% {background-position-y: 0px;}
+  100% {background-position-y: 1000px;}
+}
+@keyframes prenderayo {
+  0% {opacity: 0%;}
+  25% {opacity: 25%;}
+  50% {opacity: 50%;}
+  75% {opacity: 75%;}
+  100% {opacity: 0%;}
+}
+
+@font-face{
+  font-family: "Ghost";
+  src: url("../font/OldPress.ttf");
+}
+.eventos{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+}
+.form{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+  width: 30%;
+}
+#apellido,#nombre{
+  border: 1px dotted #999;
+
+}
+#mensaje{
+  height: 100px;
+  border-radius: 5px;
+  background-color: #def
+}
+.accordion {
+  background-color: red;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: white 5px groove
+  text-align: left;
+  outline: none;
+  font-size: 35px;
+  transition: 0.4s;
+  font-family: "Ghost";
+}
+
+.pie{
+  color: black;
+}
+.fotoevent{
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: black 5px groove
+
+}
+
+.fotoevent:hover{
+  animation: moverevento 1250ms infinite;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+} /*ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*/
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: #6A1C0B;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  display: flex;
+}
+.reloj{
+  text-align: center;
+  margin-top: -20%;
+}
+h1{
+  font-family: "Ghost";
+  color: #FFFF;
+  font-weight: 100;
+  font-size: 80px;
+  margin: 40px 0px 20px;
+}
+label{
+  font-family: "Ghost";
+  font-size: 50px;
+  color : white;
+  margin-bottom: 10px;
+  animation: prenderayo 1s linear infinite;
+}
+input{
+  font-family: "Ghost";
+  font-size: 50px;
+  color : black;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #39c;
+}
+#nombre,#apellido{
+}
+#nombre:hover,#apellido:hover{
+  animation: movimiento 1250ms infinite;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+#mensaje:hover{
+  animation: movimientogrande 1250ms infinite;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+
+}
+.setColor{
+  animation: cambiarcolor 1000ms forwards;
+}
+@keyframes cambiarcolor {
+  to{
+    top: 1000px;
+    background-color: red;
+  }
+}
+@keyframes movimiento {
+  to{
+    transform: scale(1.5);
+    background-color: red;
+
+  }
+}
+@keyframes movimientogrande {
+  to{
+    transform: scale(3);
+    background-color: red;
+  }
+}
+#enviar{
+  background-color: red;
+
+  margin-left: 40%;;
+}
+p{
+  font-family: "Ghost";
+  font-size: 40px;
+}
+#clockdiv{
+
+    color: #000;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 50px;
+}
+
+#clockdiv > div{
+    padding: 10px;
+    border-radius: 3px;
+    background: #fff;
+    display: inline-block;
+}
+
+#clockdiv div > span{
+    padding: 15px;
+    border-radius: 3px;
+    background: #857B7B;
+    display: inline-block;
+}
+
+.smalltext{
+    padding-top: 5px;
+    font-size: 16px;
+}
