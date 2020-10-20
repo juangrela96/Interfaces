@@ -9,22 +9,31 @@ class Ficha extends Figure {
     this.posYOriginal=posY;
     this.enuso = false;
   }
-
-  draw(){
-    let imgX = this.posX - this.radius;
-    let imgY = this.posY - this.radius;
+/*draw(){
+    let pat = this.context.createPattern(this.imagen,'repeat');
     this.context.beginPath();
-    this.context.fillStyle = this.color;
-    this.context.arc(this.posX, this.posY, this.radius, 0, Math.PI * 2);
+    this.context.arc(this.posX,this.posY,this.radius,0,2 * Math.PI);
+    this.context.fillStyle=pat;
     this.context.fill();
-    if (this.highlighted === true) {
-      this.context.strokeStyle = this.highlightedStyle;
-      this.context.lineWidth = 5;
-      this.context.stroke();
-    }
-    this.context.drawImage(this.imagen, imgX, imgY,44,43);
     this.context.closePath();
-  }
+  } */
+
+
+    draw(){
+        let imgX = this.posX - this.radius;
+        let imgY = this.posY - this.radius;
+        this.context.beginPath();
+        this.context.fillStyle = this.color;
+        this.context.arc(this.posX, this.posY, this.radius, 0, Math.PI * 2);
+        this.context.fill();
+        if (this.highlighted === true) {
+          this.context.strokeStyle = this.highlightedStyle;
+          this.context.lineWidth = 5;
+          this.context.stroke();
+        }
+        this.context.drawImage(this.imagen, imgX, imgY,44,43);
+        this.context.closePath();
+}
   getRadius(){
     return this.radius;
   }
