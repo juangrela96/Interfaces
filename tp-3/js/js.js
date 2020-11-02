@@ -28,9 +28,12 @@ let bevento = document.querySelector("#beventos").addEventListener("click",funct
 let bmensaje = document.querySelector("#bmensajes").addEventListener("click",function(){
   document.querySelector("#formulario").scrollIntoView(true);
 });
-
-
-
+let bactores = document.querySelector("#bactores").addEventListener("click",function(){
+  document.querySelector("#actores").scrollIntoView(true);
+});
+let bescenas = document.querySelector("#bescenas").addEventListener("click",function(){
+  document.querySelector("#carrusel").scrollIntoView(true);
+});
 /*let imagenes = document.querySelector(".fotoevent");
 
 for (let i = 0; i < imagenes.length; i++) {
@@ -47,6 +50,11 @@ function moverImagen(e){
   imagenes.style.transition = "transform 0.1s linear";
 } */
 
+window.addEventListener('scroll', () => {
+  let scroll = window.scrollY;
+  document.body.style.setProperty('--scroll',scroll);
+}, false);
+
 window.onload = function(){
   document.querySelector(".carga").scrollIntoView(true);
   setTimeout(removeLoad,3000);
@@ -57,35 +65,44 @@ window.onscroll = function(){
   if (altura < 1000 && actores.classList.contains("mostrar")) {
     ocultarElemento(actores);
   }
-  else if (altura > 1200 && altura <2000 && !actores.classList.contains("mostrar")) {
+  else if (altura > 1200 && altura <=2086 && !actores.classList.contains("mostrar")) {
     mostrarElemento(actores,15);
     if (carrusel.classList.contains("mostrar")) {
       ocultarElemento(carrusel);
     }
   }
-  else if (altura > 2000 && altura <2500) {
+  else if (altura > 2100 && altura <2500) {
     ocultarElemento(actores);
     mostrarElemento(carrusel,15);
+    if (calendario.classList.contains("mostrar")) {
+      ocultarElemento(calendario);
+    }
   }
   else if (altura > 2700 && altura<3200 && !carrusel.classList.contains("mostrar")) {
     mostrarElemento(carrusel,15);
+    if (calendario.classList.contains("mostrar")) {
+      ocultarElemento(calendario);
+    }
   }
   else if (altura > 3300 && carrusel.classList.contains("mostrar")) {
     ocultarElemento(carrusel);
+    if (calendario.classList.contains("mostrar")) {
+      ocultarElemento(calendario);
+    }
   }
-  else if (altura < 3800 && calendario.classList.contains("mostrar") ) {
+  else if (altura < 3900 && calendario.classList.contains("mostrar") ) {
     ocultarElemento(calendario);
   }
-  else if (altura > 3800 && altura < 4700) {
+  else if (altura > 4000 && !calendario.classList.contains("mostrar") && altura < 5400) {
     mostrarElemento(calendario,25);
   }
-  else if (altura > 4700 && calendario.classList.contains("mostrar")) {
+  else if (altura > 5400 && calendario.classList.contains("mostrar")) {
     ocultarElemento(calendario);
   }
-  else if (altura > 4900 && altura < 6000 ) {
+  else if (altura > 5400 && altura < 6000 ) {
     mostrarElemento(form,30);
   }
-  else if (altura < 5500 && form.classList.contains("mostrar")) {
+  else if (altura < 6000 && form.classList.contains("mostrar")) {
     ocultarElemento(form);
   }
 }
